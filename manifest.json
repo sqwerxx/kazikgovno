@@ -1,5 +1,5 @@
 {
-  "background_color": "#ffffff",
+  "background_color": "#1E1E24",
   "dir": "ltr",
   "display": "standalone",
   "name": "YobuDal KazinO",
@@ -7,8 +7,8 @@
   "scope": "/",
   "short_name": "KazikSuka",
   "start_url": "https://sqwerxx.github.io/kazikgovno/",
-  "theme_color": "#ffffff",
-  "id": "YobuDal KazinO"
+  "theme_color": "#F5B042",
+  "id": "YobuDalKazinO",
   "icons": [
     {
       "src": "icon-192.png",
