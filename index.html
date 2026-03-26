@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Yobu Casino | Премиум слоты</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ============================================
+           YOBU CASINO - Premium Slots Experience
+           Dynamic Theme System
+        ============================================ */
+
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Dark Theme (Default) */
+        :root {
+            --bg-primary: #1E1E24;
+            --bg-secondary: #26262D;
+            --bg-surface: #2E2E36;
+            --bg-surface-light: #36363F;
+            --accent: #F5B042;
+            --accent-light: #FFC857;
+            --accent-glow: rgba(245, 176, 66, 0.35);
+            --accent-soft: rgba(245, 176, 66, 0.08);
+            --accent-border: rgba(245, 176, 66, 0.25);
+            --text-primary: #EEEEF0;
+            --text-secondary: #8A8B9E;
+            --text-muted: #55566A;
+            --border-subtle: rgba(255, 255, 255, 0.06);
+            --card-bg: rgba(38, 38, 45, 0.75);
+            --green: #22C55E;
+            --radius: 16px;
+            --radius-sm: 10px;
+            --radius-xs: 6px;
+            --radius-pill: 100px;
+        }
+
+        /* Light Theme */
+        [data-theme="light"] {
+            --bg-primary: #F5F5F7;
+            --bg-secondary: #FFFFFF;
+            --bg-surface: #F0F0F2;
+            --bg-surface-light: #E8E8EC;
+            --accent: #F5B042;
+            --accent-light: #FFC857;
+            --accent-glow: rgba(245, 176, 66, 0.25);
+            --accent-soft: rgba(245, 176, 66, 0.1);
+            --accent-border: rgba(245, 176, 66, 0.35);
+            --text-primary: #1A1A1F;
+            --text-secondary: #5A5A6E;
+            --text-muted: #8A8A9E;
+            --border-subtle: rgba(0, 0, 0, 0.08);
+            --card-bg: rgba(255, 255, 255, 0.85);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            position: relative;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Grain overlay */
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.5;
+            transition: opacity 0.3s ease;
+        }
+
+        [data-theme="light"] body::after {
+            opacity: 0.2;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 800px;
+            height: 600px;
+            background: radial-gradient(circle at center,
+                var(--accent-soft) 0%,
+                rgba(245, 176, 66, 0.02) 40%,
+                transparent 70%);
+            pointer-events: none;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .mono { font-family: 'JetBrains Mono', monospace; }
+
+        /* Casino Card */
+        .casino-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: var(--radius);
+            border: 1px solid var(--border-subtle);
+            overflow: hidden;
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.2);
+            transition: background 0.3s ease;
+        }
+
+        /* Header */
+        .game-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 28px;
+            border-bottom: 1px solid var(--border-subtle);
+            background: rgba(0, 0, 0, 0.1);
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        [data-theme="light"] .game-header {
+            background: rgba(0, 0, 0, 0.02);
+        }
+
+        .game-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .title-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--accent);
+            border-radius: 12px;
+            display: grid;
+            place-items: center;
+            font-size: 20px;
+            color: #1A1A1F;
+            box-shadow: 0 0 24px var(--accent-glow);
+        }
+
+        .game-title h1 {
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            background: linear-gradient(135deg, var(--accent-light) 0%, var(--accent) 60%, var(--accent-light) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .balance-card {
+            background: var(--bg-surface);
+            border-radius: var(--radius-pill);
+            padding: 8px 20px;
+            border: 1px solid var(--border-subtle);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .balance-label {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-muted);
+        }
+
+        .balance-value {
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            color: var(--text-primary);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Theme Toggle Button */
+        .theme-toggle {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-pill);
+            padding: 8px 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--accent-border);
+            color: var(--accent);
+        }
+
+        .theme-toggle i {
+            font-size: 16px;
+        }
+
+        /* Slot Machine */
+        .slot-machine {
+            padding: 32px;
+        }
+
+        .slots-grid {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 28px;
+            flex-wrap: wrap;
+        }
+
+        .slot-reel {
+            flex: 1;
+            min-width: 85px;
+            max-width: 105px;
+            background: var(--bg-secondary);
+            border-radius: 20px;
+            padding: 12px 8px;
+            border: 1px solid var(--border-subtle);
+            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.1), 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .reel-viewport {
+            position: relative;
+            height: 270px;
+            overflow: hidden;
+            border-radius: 14px;
+            background: var(--bg-primary);
+        }
+
+        .reel-track {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            will-change: transform;
+        }
+
+        .reel-symbol {
+            height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 42px;
+            background: var(--bg-surface);
+            margin: 0;
+            border-radius: 10px;
+            flex-shrink: 0;
+            box-sizing: border-box;
+            transition: background 0.2s ease;
+        }
+
+        /* Win Message */
+        .win-message {
+            background: var(--bg-surface);
+            border-radius: var(--radius-pill);
+            padding: 16px 24px;
+            text-align: center;
+            margin: 20px 0;
+            border: 1px solid var(--border-subtle);
+            min-height: 88px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .win-big {
+            color: var(--accent-light);
+            text-shadow: 0 0 10px var(--accent-glow);
+            font-weight: 700;
+        }
+
+        .win-normal {
+            color: var(--green);
+        }
+
+        .no-win {
+            color: var(--text-muted);
+        }
+
+        /* Buttons */
+        .button-group {
+            display: flex;
+            gap: 16px;
+            margin-top: 8px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 14px 28px;
+            border-radius: var(--radius-pill);
+            font-family: inherit;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s ease;
+            flex: 1;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: #1A1A1F;
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            background: var(--accent-light);
+            transform: translateY(-2px);
+            box-shadow: 0 0 30px var(--accent-glow);
+        }
+
+        .btn-secondary {
+            background: rgba(128, 128, 128, 0.1);
+            color: var(--text-primary);
+            border: 1px solid var(--border-subtle);
+        }
+
+        .btn-secondary:hover:not(:disabled) {
+            background: rgba(128, 128, 128, 0.15);
+            border-color: var(--accent-border);
+        }
+
+        .btn-secondary.active {
+            background: var(--accent);
+            color: #1A1A1F;
+            border-color: transparent;
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .auto-progress {
+            margin-top: 16px;
+            text-align: center;
+            font-size: 13px;
+            color: var(--text-secondary);
+            padding: 10px;
+            background: var(--bg-surface);
+            border-radius: var(--radius-pill);
+            border: 1px solid var(--border-subtle);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Deposit Section */
+        .deposit-section {
+            margin-top: 24px;
+            background: var(--bg-surface);
+            border-radius: var(--radius);
+            padding: 24px;
+            border: 1px solid var(--border-subtle);
+        }
+
+        .deposit-title {
+            font-weight: 700;
+            font-size: 14px;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .deposit-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 12px;
+        }
+
+        .deposit-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-sm);
+            padding: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .deposit-card:hover {
+            border-color: var(--accent-border);
+            background: var(--bg-surface-light);
+            transform: translateY(-2px);
+        }
+
+        .deposit-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .deposit-coins {
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--text-primary);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .deposit-price {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .deposit-price span {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .deposit-btn {
+            background: var(--accent);
+            border: none;
+            padding: 8px 16px;
+            border-radius: var(--radius-pill);
+            color: #1A1A1F;
+            font-weight: 600;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .deposit-btn:hover {
+            background: var(--accent-light);
+            transform: scale(1.05);
+        }
+
+        /* Info Panel */
+        .info-panel {
+            margin-top: 24px;
+            background: var(--bg-surface);
+            border-radius: var(--radius);
+            padding: 24px;
+            border: 1px solid var(--border-subtle);
+        }
+
+        .info-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .info-title {
+            font-weight: 700;
+            font-size: 14px;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .paytable {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .pay-item {
+            background: var(--bg-secondary);
+            padding: 8px 16px;
+            border-radius: var(--radius-pill);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 13px;
+            border: 1px solid var(--border-subtle);
+        }
+
+        .pay-item .symbol {
+            font-size: 20px;
+        }
+
+        .pay-item .value {
+            color: var(--accent);
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .multiplier-info {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: var(--radius-sm);
+            padding: 14px 18px;
+            font-size: 12px;
+            color: var(--text-muted);
+            text-align: center;
+            border: 1px solid var(--border-subtle);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        [data-theme="light"] .multiplier-info {
+            background: rgba(0, 0, 0, 0.03);
+        }
+
+        .game-footer {
+            padding: 16px 28px;
+            border-top: 1px solid var(--border-subtle);
+            text-align: center;
+            font-size: 11px;
+            color: var(--text-muted);
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        [data-theme="light"] .game-footer {
+            background: rgba(0, 0, 0, 0.02);
+        }
+
+        /* Animations */
+        @keyframes confettiFall {
+            to {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        .confetti {
+            position: fixed;
+            width: 8px;
+            height: 8px;
+            top: -10px;
+            z-index: 9999;
+            pointer-events: none;
+            animation: confettiFall 1.2s linear forwards;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(8px);
+            z-index: 10000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--bg-secondary);
+            border: 1px solid var(--accent-border);
+            border-radius: var(--radius);
+            padding: 32px;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+        }
+
+        .modal-content h3 {
+            font-size: 24px;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+        }
+
+        .modal-content p {
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+        }
+
+        .modal-close {
+            background: var(--accent);
+            border: none;
+            padding: 12px 24px;
+            border-radius: var(--radius-pill);
+            color: #1A1A1F;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            body { padding: 16px; }
+            
+            .game-header {
+                flex-direction: column;
+                text-align: center;
+                padding: 16px 20px;
+            }
+            
+            .header-actions {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .slot-machine { padding: 20px; }
+            
+            .slots-grid { gap: 8px; }
+            
+            .slot-reel {
+                min-width: 60px;
+                padding: 8px 4px;
+            }
+            
+            .reel-viewport { height: 180px; }
+            
+            .reel-symbol {
+                height: 60px;
+                font-size: 28px;
+            }
+            
+            .btn { padding: 12px 20px; font-size: 13px; }
+            
+            .balance-value { font-size: 22px; }
+            .game-title h1 { font-size: 18px; }
+            .title-icon { width: 32px; height: 32px; font-size: 16px; }
+            
+            .deposit-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .slot-reel { min-width: 50px; }
+            .reel-symbol { font-size: 22px; height: 50px; }
+            .reel-viewport { height: 150px; }
+            .pay-item { padding: 4px 12px; font-size: 11px; }
+            .pay-item .symbol { font-size: 16px; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .reel-track { transition: none !important; }
+            .confetti { animation: none; display: none; }
+        }
+    </style>
+</head>
+<body data-theme="dark">
+
+<div class="container">
+    <div class="casino-card">
+        <div class="game-header">
+            <div class="game-title">
+                <div class="title-icon">
+                    <i class="fas fa-crown"></i>
+                </div>
+                <h1>Yobu Casino</h1>
+            </div>
+            <div class="header-actions">
+                <div class="balance-card">
+                    <span class="balance-label">
+                        <i class="fas fa-coins"></i> BALANCE
+                    </span>
+                    <span class="balance-value" id="balanceDisplay">1000</span>
+                </div>
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-sun" id="themeIcon"></i>
+                    <span id="themeText">Light</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="slot-machine">
+            <div class="slots-grid" id="slotsGrid"></div>
+            
+            <div class="win-message" id="winMessage">
+                <i class="fas fa-gem"></i> PRESS SPIN TO START <i class="fas fa-gem"></i>
+            </div>
+            
+            <div class="button-group">
+                <button class="btn btn-primary" id="spinButton">
+                    <i class="fas fa-sync-alt"></i> SPIN
+                </button>
+                <button class="btn btn-secondary" id="autoSpinButton">
+                    <i class="fas fa-infinity"></i> AUTO x10
+                </button>
+            </div>
+            <div id="autoProgress" class="auto-progress" style="display: none;"></div>
+        </div>
+
+        <!-- Deposit Section -->
+        <div class="deposit-section">
+            <div class="deposit-title">
+                <i class="fas fa-credit-card"></i> DEPOSIT
+            </div>
+            <div class="deposit-grid" id="depositGrid"></div>
+        </div>
+
+        <div class="info-panel">
+            <div class="info-header">
+                <span class="info-title"><i class="fas fa-gem"></i> SYMBOL VALUES</span>
+                <span class="info-title"><i class="fas fa-layer-group"></i> MULTIPLIERS</span>
+            </div>
+            <div class="paytable" id="paytable"></div>
+            <div class="multiplier-info">
+                <i class="fas fa-chart-line"></i> 2x → x2 | 3x → x3 | 4x → x5 | 5x → x10<br>
+                <i class="fas fa-arrow-down"></i> Only MIDDLE ROW counts
+            </div>
+        </div>
+        
+        <div class="game-footer">
+            <i class="fas fa-star-of-life"></i> Each spin: 50 coins <i class="fas fa-star-of-life"></i>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal" id="depositModal">
+    <div class="modal-content">
+        <i class="fas fa-check-circle" style="font-size: 48px; color: var(--green); margin-bottom: 16px;"></i>
+        <h3>Payment Processed</h3>
+        <p id="modalMessage">Balance updated successfully!</p>
+        <button class="modal-close" onclick="closeModal()">Continue</button>
+    </div>
+</div>
+
+<script>
+    // ========== GAME CONFIGURATION ==========
+    const SYMBOLS = ['🍒', '🍋', '🍎', '🍇', '🟣', '💎', '7️⃣'];
+    const SYMBOL_VALUES = {
+        '🍒': { name: 'Cherry', value: 1 },
+        '🍋': { name: 'Lemon', value: 2 },
+        '🍎': { name: 'Apple', value: 2 },
+        '🍇': { name: 'Grape', value: 3 },
+        '🟣': { name: 'Plum', value: 3 },
+        '💎': { name: 'Diamond', value: 5 },
+        '7️⃣': { name: 'Seven', value: 10 }
+    };
+    
+    const MULTIPLIER_BY_COUNT = { 2: 2, 3: 3, 4: 5, 5: 10 };
+    const SPIN_COST = 50;
+    const AUTO_SPINS_COUNT = 10;
+    const SPIN_DURATION = 1800;
+    
+    // Deposit packages
+    const DEPOSITS = [
+        { coins: 100, price: 1.99, priceFormatted: "$1.99" },
+        { coins: 500, price: 8.99, priceFormatted: "$8.99" },
+        { coins: 1000, price: 15.99, priceFormatted: "$15.99" },
+        { coins: 5000, price: 74.99, priceFormatted: "$74.99" },
+        { coins: 10000, price: 124.99, priceFormatted: "$124.99" }
+    ];
+    
+    let currentBalance = 1000;
+    let isSpinning = false;
+    let autoMode = false;
+    let autoRemaining = 0;
+    
+    let slotColumns = [];
+    let reelTracks = [];
+    let slotReels = [];
+    
+    let spinBtn, autoBtn, balanceSpan, winMessageDiv, autoProgressDiv, slotsGrid;
+    
+    const SYMBOL_HEIGHT = 90;
+    const VISIBLE_SYMBOLS = 3;
+    
+    // Theme Management
+    function initTheme() {
+        const savedTheme = localStorage.getItem('yobu-theme') || 'dark';
+        document.body.setAttribute('data-theme', savedTheme);
+        updateThemeUI(savedTheme);
+    }
+    
+    function updateThemeUI(theme) {
+        const themeIcon = document.getElementById('themeIcon');
+        const themeText = document.getElementById('themeText');
+        
+        if (theme === 'light') {
+            themeIcon.className = 'fas fa-moon';
+            themeText.textContent = 'Dark';
+        } else {
+            themeIcon.className = 'fas fa-sun';
+            themeText.textContent = 'Light';
+        }
+    }
+    
+    function toggleTheme() {
+        const currentTheme = document.body.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        document.body.setAttribute('data-theme', newTheme);
+        localStorage.setItem('yobu-theme', newTheme);
+        updateThemeUI(newTheme);
+        
+        // Update confetti colors for new theme
+        const confettiColors = newTheme === 'dark' 
+            ? ['#F5B042', '#FFC857', '#F59E0B', '#22C55E', '#EEEEF0']
+            : ['#F5B042', '#FFC857', '#F59E0B', '#22C55E', '#1A1A1F'];
+    }
+    
+    function getRandomSymbol() {
+        return SYMBOLS[Math.floor(Math.random() * SYMBOLS.length)];
+    }
+    
+    // Initialize slots
+    function initSlots() {
+        slotsGrid = document.getElementById('slotsGrid');
+        slotsGrid.innerHTML = '';
+        reelTracks = [];
+        slotReels = [];
+        slotColumns = [];
+        
+        for (let col = 0; col < 5; col++) {
+            const reel = document.createElement('div');
+            reel.className = 'slot-reel';
+            reel.dataset.col = col;
+            
+            const viewport = document.createElement('div');
+            viewport.className = 'reel-viewport';
+            
+            const track = document.createElement('div');
+            track.className = 'reel-track';
+            
+            const symbols = [];
+            for (let row = 0; row < VISIBLE_SYMBOLS; row++) {
+                const symbolDiv = document.createElement('div');
+                symbolDiv.className = 'reel-symbol';
+                if (row === 1) symbolDiv.classList.add('middle-symbol');
+                const randomSymbol = getRandomSymbol();
+                symbolDiv.textContent = randomSymbol;
+                symbolDiv.style.height = `${SYMBOL_HEIGHT}px`;
+                track.appendChild(symbolDiv);
+                symbols.push(randomSymbol);
+            }
+            
+            viewport.appendChild(track);
+            reel.appendChild(viewport);
+            slotsGrid.appendChild(reel);
+            
+            slotReels.push(reel);
+            reelTracks.push(track);
+            slotColumns.push([...symbols]);
+        }
+    }
+    
+    function initPaytable() {
+        const paytableDiv = document.getElementById('paytable');
+        paytableDiv.innerHTML = '';
+        for (const [emoji, data] of Object.entries(SYMBOL_VALUES)) {
+            const item = document.createElement('div');
+            item.className = 'pay-item';
+            item.innerHTML = `<span class="symbol">${emoji}</span><span>${data.name}</span><span class="value">${data.value}₿</span>`;
+            paytableDiv.appendChild(item);
+        }
+    }
+    
+    function initDeposits() {
+        const depositGrid = document.getElementById('depositGrid');
+        depositGrid.innerHTML = '';
+        
+        DEPOSITS.forEach(deposit => {
+            const card = document.createElement('div');
+            card.className = 'deposit-card';
+            card.innerHTML = `
+                <div class="deposit-info">
+                    <div class="deposit-coins">${deposit.coins.toLocaleString()} coins</div>
+                    <div class="deposit-price">for <span>${deposit.priceFormatted}</span></div>
+                </div>
+                <button class="deposit-btn" data-coins="${deposit.coins}" data-price="${deposit.price}">
+                    <i class="fas fa-shopping-cart"></i> BUY
+                </button>
+            `;
+            
+            const btn = card.querySelector('.deposit-btn');
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                processDeposit(deposit.coins, deposit.priceFormatted);
+            });
+            
+            depositGrid.appendChild(card);
+        });
+    }
+    
+    function processDeposit(coins, price) {
+        currentBalance += coins;
+        updateBalanceUI();
+        
+        const modal = document.getElementById('depositModal');
+        const modalMessage = document.getElementById('modalMessage');
+        modalMessage.innerHTML = `You purchased ${coins.toLocaleString()} coins for ${price}!<br>New balance: ${currentBalance.toLocaleString()} coins`;
+        modal.classList.add('active');
+        
+        winMessageDiv.innerHTML = `<i class="fas fa-shopping-cart"></i> +${coins} coins added! New balance: ${currentBalance} <i class="fas fa-coins"></i>`;
+        winMessageDiv.className = 'win-message win-normal';
+        setTimeout(() => {
+            if (winMessageDiv) winMessageDiv.className = 'win-message';
+        }, 3000);
+    }
+    
+    function closeModal() {
+        document.getElementById('depositModal').classList.remove('active');
+    }
+    
+    // Create animated track
+    function createAnimatedTrack(track, finalSymbols) {
+        const animatedSymbols = [];
+        for (let i = 0; i < 35; i++) {
+            animatedSymbols.push(getRandomSymbol());
+        }
+        animatedSymbols.push(...finalSymbols);
+        
+        track.innerHTML = '';
+        animatedSymbols.forEach(sym => {
+            const div = document.createElement('div');
+            div.className = 'reel-symbol';
+            div.textContent = sym;
+            div.style.height = `${SYMBOL_HEIGHT}px`;
+            track.appendChild(div);
+        });
+        
+        return animatedSymbols.length;
+    }
+    
+    // Animation with perfect alignment
+    async function animateColumnScroll(colIndex, finalSymbols) {
+        return new Promise((resolve) => {
+            const track = reelTracks[colIndex];
+            const totalSymbols = createAnimatedTrack(track, finalSymbols);
+            
+            const totalHeight = totalSymbols * SYMBOL_HEIGHT;
+            const viewportHeight = VISIBLE_SYMBOLS * SYMBOL_HEIGHT;
+            const endOffset = -(totalHeight - viewportHeight);
+            
+            const startTime = performance.now();
+            const startOffset = 0;
+            
+            function animate(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(1, elapsed / SPIN_DURATION);
+                const easeOut = 1 - Math.pow(1 - progress, 3);
+                const currentOffset = startOffset + (endOffset - startOffset) * easeOut;
+                track.style.transform = `translateY(${currentOffset}px)`;
+                
+                if (progress < 1) {
+                    requestAnimationFrame(animate);
+                } else {
+                    track.innerHTML = '';
+                    finalSymbols.forEach((sym, idx) => {
+                        const div = document.createElement('div');
+                        div.className = 'reel-symbol';
+                        if (idx === 1) div.classList.add('middle-symbol');
+                        div.textContent = sym;
+                        div.style.height = `${SYMBOL_HEIGHT}px`;
+                        track.appendChild(div);
+                    });
+                    
+                    track.style.transform = `translateY(0px)`;
+                    slotColumns[colIndex] = [...finalSymbols];
+                    resolve();
+                }
+            }
+            
+            requestAnimationFrame(animate);
+        });
+    }
+    
+    // Calculate winnings
+    function calculateWinnings(symbolsArray) {
+        const frequency = {};
+        for (const sym of symbolsArray) {
+            frequency[sym] = (frequency[sym] || 0) + 1;
+        }
+        
+        let totalWin = 0;
+        const winDetails = [];
+        
+        for (const [symbol, count] of Object.entries(frequency)) {
+            const baseValue = SYMBOL_VALUES[symbol]?.value || 0;
+            if (baseValue === 0) continue;
+            
+            const baseSum = baseValue * count;
+            let multiplier = 1;
+            if (count >= 2) {
+                multiplier = MULTIPLIER_BY_COUNT[count] || 1;
+            }
+            
+            const groupWin = baseSum * multiplier;
+            totalWin += groupWin;
+            
+            if (multiplier > 1) {
+                winDetails.push(`${symbol} x${count} → ${baseSum} ×${multiplier} = ${groupWin}`);
+            }
+        }
+        
+        return { totalWin, winDetails };
+    }
+    
+    function getWinMessageText(symbols, totalWin, winDetails) {
+        if (totalWin === 0) {
+            return `<i class="fas fa-dice"></i> ${symbols.join(' ')} <i class="fas fa-dice"></i><br>No match in middle row`;
+        }
+        
+        let detailsHtml = winDetails.slice(0, 2).join(' • ');
+        if (winDetails.length > 2) detailsHtml += ` +${winDetails.length - 2} more`;
+        
+        const emoji = totalWin >= 100 ? '🎉💰 JACKPOT! 💰🎉' : (totalWin >= 50 ? '🍀✨ WINNER! ✨🍀' : '✨ WIN ✨');
+        return `${emoji}<br><span style="font-size: 13px;">+${totalWin} coins</span><br><span style="font-size: 11px; opacity: 0.8;">${detailsHtml}</span>`;
+    }
+    
+    // Main spin
+    async function performSpin() {
+        if (isSpinning) return null;
+        if (currentBalance < SPIN_COST) {
+            winMessageDiv.innerHTML = `<i class="fas fa-exclamation-triangle"></i> Insufficient balance! <i class="fas fa-exclamation-triangle"></i>`;
+            return null;
+        }
+        
+        isSpinning = true;
+        spinBtn.disabled = true;
+        if (!autoMode) autoBtn.disabled = true;
+        
+        currentBalance -= SPIN_COST;
+        updateBalanceUI();
+        
+        const finalSymbolsMatrix = [];
+        for (let col = 0; col < 5; col++) {
+            const columnSymbols = [];
+            for (let row = 0; row < VISIBLE_SYMBOLS; row++) {
+                columnSymbols.push(getRandomSymbol());
+            }
+            finalSymbolsMatrix.push(columnSymbols);
+        }
+        
+        const animPromises = [];
+        for (let col = 0; col < 5; col++) {
+            animPromises.push(animateColumnScroll(col, finalSymbolsMatrix[col]));
+        }
+        
+        await Promise.all(animPromises);
+        
+        const middleRowSymbols = slotColumns.map(col => col[1]);
+        const { totalWin, winDetails } = calculateWinnings(middleRowSymbols);
+        
+        let messageText, winClass;
+        
+        if (totalWin > 0) {
+            currentBalance += totalWin;
+            messageText = getWinMessageText(middleRowSymbols, totalWin, winDetails);
+            if (totalWin >= 100) {
+                winClass = "win-big";
+                createConfetti();
+            } else {
+                winClass = "win-normal";
+            }
+        } else {
+            messageText = `<i class="fas fa-dice"></i> ${middleRowSymbols.join(' ')} <i class="fas fa-dice"></i><br>No match this time`;
+            winClass = "no-win";
+        }
+        
+        updateBalanceUI();
+        winMessageDiv.innerHTML = messageText;
+        winMessageDiv.className = 'win-message ' + winClass;
+        
+        for (let col = 0; col < 5; col++) {
+            const middleSymbol = slotReels[col].querySelector('.reel-symbol.middle-symbol');
+            if (middleSymbol) {
+                middleSymbol.style.transition = 'all 0.3s ease';
+                middleSymbol.style.background = 'var(--accent-soft)';
+                middleSymbol.style.border = '1px solid var(--accent-border)';
+                setTimeout(() => {
+                    if (middleSymbol) {
+                        middleSymbol.style.background = '';
+                        middleSymbol.style.border = '';
+                    }
+                }, 600);
+            }
+        }
+        
+        isSpinning = false;
+        if (!autoMode) {
+            spinBtn.disabled = false;
+            autoBtn.disabled = false;
+        }
+        
+        return totalWin;
+    }
+    
+    // Auto spin
+    async function startAutoSpin() {
+        if (autoMode || isSpinning) return;
+        if (currentBalance < SPIN_COST) {
+            winMessageDiv.innerHTML = "⚠️ Insufficient balance for auto-spin!";
+            return;
+        }
+        
+        autoMode = true;
+        autoRemaining = AUTO_SPINS_COUNT;
+        autoBtn.disabled = true;
+        spinBtn.disabled = true;
+        autoBtn.classList.add('active');
+        autoProgressDiv.style.display = 'block';
+        updateAutoProgress();
+        
+        for (let i = 0; i < AUTO_SPINS_COUNT; i++) {
+            if (!autoMode) break;
+            if (currentBalance < SPIN_COST) {
+                winMessageDiv.innerHTML = "⛔ Auto-stop: insufficient balance! ⛔";
+                break;
+            }
+            autoRemaining = AUTO_SPINS_COUNT - i;
+            updateAutoProgress();
+            await performSpin();
+            if (autoMode && i < AUTO_SPINS_COUNT - 1 && currentBalance >= SPIN_COST) {
+                await new Promise(r => setTimeout(r, 500));
+            }
+        }
+        
+        stopAutoMode();
+    }
+    
+    function stopAutoMode() {
+        autoMode = false;
+        autoRemaining = 0;
+        autoBtn.classList.remove('active');
+        autoProgressDiv.style.display = 'none';
+        autoBtn.disabled = false;
+        spinBtn.disabled = false;
+        updateAutoProgress();
+    }
+    
+    function updateAutoProgress() {
+        if (autoProgressDiv && autoMode && autoRemaining > 0) {
+            autoProgressDiv.innerHTML = `<i class="fas fa-play-circle"></i> AUTO-SPIN: ${autoRemaining} of ${AUTO_SPINS_COUNT} remaining <i class="fas fa-dice"></i>`;
+        } else if (autoProgressDiv) {
+            autoProgressDiv.innerHTML = '';
+        }
+    }
+    
+    function updateBalanceUI() {
+        balanceSpan.innerText = Math.floor(currentBalance);
+        balanceSpan.style.transform = 'scale(1.05)';
+        setTimeout(() => { if(balanceSpan) balanceSpan.style.transform = ''; }, 150);
+    }
+    
+    function createConfetti() {
+        const theme = document.body.getAttribute('data-theme');
+        const colors = theme === 'dark' 
+            ? ['#F5B042', '#FFC857', '#F59E0B', '#22C55E', '#EEEEF0']
+            : ['#F5B042', '#FFC857', '#F59E0B', '#22C55E', '#1A1A1F'];
+            
+        for (let i = 0; i < 80; i++) {
+            const conf = document.createElement('div');
+            conf.classList.add('confetti');
+            const size = Math.random() * 8 + 4;
+            conf.style.width = `${size}px`;
+            conf.style.height = `${size}px`;
+            conf.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            conf.style.left = `${Math.random() * 100}%`;
+            conf.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+            conf.style.position = 'fixed';
+            conf.style.top = '-10px';
+            conf.style.zIndex = '9999';
+            conf.style.pointerEvents = 'none';
+            document.body.appendChild(conf);
+            setTimeout(() => conf.remove(), 1300);
+        }
+    }
+    
+    // Initialize
+    function init() {
+        initTheme();
+        initSlots();
+        initPaytable();
+        initDeposits();
+        
+        spinBtn = document.getElementById('spinButton');
+        autoBtn = document.getElementById('autoSpinButton');
+        balanceSpan = document.getElementById('balanceDisplay');
+        winMessageDiv = document.getElementById('winMessage');
+        autoProgressDiv = document.getElementById('autoProgress');
+        
+        const themeToggleBtn = document.getElementById('themeToggle');
+        themeToggleBtn.addEventListener('click', toggleTheme);
+        
+        spinBtn.addEventListener('click', async () => {
+            if (!isSpinning && !autoMode && currentBalance >= SPIN_COST) {
+                await performSpin();
+            } else if (currentBalance < SPIN_COST) {
+                winMessageDiv.innerHTML = "⚠️ Insufficient balance! ⚠️";
+            }
+        });
+        
+        autoBtn.addEventListener('click', () => {
+            if (!autoMode && !isSpinning) startAutoSpin();
+            else if (autoMode) stopAutoMode();
+        });
+        
+        updateBalanceUI();
+        
+        setTimeout(() => {
+            winMessageDiv.innerHTML = '<i class="fas fa-crown"></i> Yobu Casino <i class="fas fa-crown"></i>';
+            winMessageDiv.className = 'win-message win-normal';
+        }, 200);
+    }
+    
+    window.closeModal = closeModal;
+    init();
+</script>
+</body>
+</html>
